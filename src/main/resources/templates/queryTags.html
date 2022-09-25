@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/js/http_unpkg.com_axios_dist_axios.js"></script>
+    <link rel="stylesheet" href="/css/http_cdnjs.cloudflare.com_ajax_libs_font-awesome_4.7.0_css_font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+<script th:inline="javascript">
+
+
+    window.onload=function () {
+
+
+        var blogs =[[${blogs}]];
+
+
+
+
+        for(let i=0;i<blogs.length ;i++){
+
+            var title = blogs[i].title;
+
+            let time = new Date(blogs[i].time);
+
+            var id=blogs[i].id;
+            document.getElementById("body").innerHTML+="<div class=\"card\" >\n" +
+                "                    <div class=\"card-body\" >\n" +
+                "<h5 class='card-title' ><b>"+title+"</b></h5>\n" +
+                "                       <h6 class='card-subtitle my-2 text-muted' >"+time.getFullYear().toString() + "-" + (time.getMonth() + 1).toString() + "-" + time.getDate().toString()+"</h6>\n" +
+                "<!--                        <p class=\"card-text\">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->\n" +
+                "                        <a href='/blog/queryBlog?id=" + id + "' class=\"card-link\">Check Out</a>"
+               +
+                "                    </div>\n" +
+                "                </div>"
+
+        }
+
+
+        // var blog=JSON.parse(temp); //要先把JSON字符串转换成JSON对象
+        //
+        // var title = blog.title;
+        // var time=blog.time;
+        // var content = blog.content;
+        // var converter = new showdown.Converter(); //初始化转换器
+        // converter.setOption("tables", true);
+        // var htmlcontent = converter.makeHtml(content); //将MarkDown转为html格式的内容
+        // document.getElementById("para").innerHTML = htmlcontent;
+        // document.getElementById("title").innerHTML = title;
+    }
+</script>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary" style="	background-position: left top;	background-size: 100%;	background-repeat: repeat;">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/html/index.html">Alice's Blog</a>
+    </div>
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar16" style="">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbar16">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"> <a class="nav-link" href="/html/space.html">Personal Space</a> </li>
+                <li class="nav-item" > <a class="nav-link" href="/html/tags.html">Check Tags</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/html/aboutMe.html">About me</a> </li>
+                <li class="nav-item" > <a class="nav-link" href="/html/security.html">Publish text</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="body">
+<!--                <div class="card" >-->
+<!--                    <div class="card-body" >-->
+<!--                        <h5 class="card-title"><b>Title</b></h5>-->
+<!--                        <h6 class="card-subtitle my-2 text-muted">Subtitle</h6>-->
+<!--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--                        <a href="#" class="card-link">Card link</a>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="py-2">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="card">-->
+<!--                    <div class="card-header"> Header </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <h4>Title</h4>-->
+<!--                        <p>Some quick example text to build on the card title .</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="py-5" style="">
+    <div class="container">
+        <div class="row">
+        </div>
+        <script src="/js/http_code.jquery.com_jquery-3.3.1.slim.js" ></script>
+        <script src="/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.14.6_umd_popper.js" ></script>
+        <script src="/js/http_stackpath.bootstrapcdn.com_bootstrap_4.3.1_js_bootstrap.js" ></script>
+    </div>
+</div>
+</body>
+
+</html>
