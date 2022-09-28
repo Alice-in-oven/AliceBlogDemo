@@ -16,7 +16,7 @@ public interface BlogMapper {
     @Select("select * from article where id >= #{last} -(5*(#{page}-1))-4 and id <= #{last} -(5*(#{page}-1)) order by id desc ")
     public List<Article> selectArticleByPage(@Param("page")int page,@Param("last")int last);
 
-    @Select("select * from article ")
+    @Select("select count(*) from article;")
     public List<Article> selectAllPages();
 
     @Select("select * from article where id=#{id}")
