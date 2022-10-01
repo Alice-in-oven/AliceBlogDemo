@@ -1,4 +1,4 @@
-package realm;
+package com.aliceblog.demo.realm;
 
 
 import org.apache.shiro.authc.*;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Arrays;
+
 
 public class UserRealm extends AuthorizingRealm {
 

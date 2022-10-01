@@ -7,7 +7,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import realm.UserRealm;
+import com.aliceblog.demo.realm.UserRealm;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
