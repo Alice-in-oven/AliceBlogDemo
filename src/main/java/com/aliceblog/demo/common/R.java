@@ -36,6 +36,13 @@ public class R {
         r.setMessage(ResultCodeEnum.UNKNOWN_ERROR.getMessage());
         return r;
     }
+    public static R error(ResultCodeEnum resultCodeEnum) {
+        R r = new R();
+        r.setSuccess(resultCodeEnum.getSuccess());
+        r.setCode(resultCodeEnum.getCode());
+        r.setMessage(resultCodeEnum.getMessage());
+        return r;
+    }
 
     // 设置结果，形参为结果枚举
     public static R setResult(ResultCodeEnum result) {

@@ -1,17 +1,13 @@
 package com.aliceblog.demo.Dao;
 
 import com.aliceblog.demo.POJO.Article;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
 @Mapper
-
 public interface BlogMapper {
     @Select("select * from article where id >= #{last} -(5*(#{page}-1))-4 and id <= #{last} -(5*(#{page}-1)) order by id desc ")
     public List<Article> selectArticleByPage(@Param("page")int page,@Param("last")int last);
@@ -36,6 +32,9 @@ public interface BlogMapper {
 
     @Select("select * from article where taps = #{tap}")
     public List<Article> selectBlogByTag(@Param("tap")String tap);
+
+    @Update("update article set content = #{content}, title=#{title} where id =#{id}")
+    public boolean updateBlogById(@Param("id")int id,@Param("content")String content,@Param("title")String title);
 
 }
 

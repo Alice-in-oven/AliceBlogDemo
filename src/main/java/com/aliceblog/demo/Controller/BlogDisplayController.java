@@ -3,37 +3,43 @@ package com.aliceblog.demo.Controller;
 import cn.hutool.json.JSONUtil;
 import com.aliceblog.demo.Dao.BlogMapper;
 import com.aliceblog.demo.POJO.Article;
+import com.aliceblog.demo.Service.BlogCrudService;
 import com.aliceblog.demo.common.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+
+@Component
 @RestController
 @RequestMapping("/blog")
-@Slf4j
-@Api(tags = "博客接口")
-@ApiModel(value = "博客接口")//该注解是作用于类上面的，是用来描述类的一些基本信息的。
 public class BlogDisplayController {
 
     @Autowired
     BlogMapper blogMapper;
 
+    @Autowired
+    BlogCrudService blogCrudService;
 
     @ApiOperation(value = "分页接口")//对某个接口进行描述
     @GetMapping("pageDivide")
     public R pageDivide(@ApiParam(name = "page", defaultValue = "1",required = true) @RequestParam("page")int page){
-        log.info("Query from db");
+
        int last =blogMapper.acquireLastBlogNum();
-       log.info("pageDivide");
+
         List<Article> articles = blogMapper.selectArticleByPage(page, last);
         if(articles.size()==0)return R.error().message("Fuck you");
         return R.ok().data("pageDivide",JSONUtil.toJsonStr(articles));
@@ -60,9 +66,15 @@ public class BlogDisplayController {
         return R.ok().data(title,JSONUtil.toJsonStr(articles));
     }
 
+//     @GetMapping("/updateBlog")
+//     public R updateBlog(@RequestParam("id")int id,@RequestParam("content")String content,@RequestParam("title") String title){
+//        if(blogMapper.updateBlogById(id,content,title))
+//          return   R.ok();
+//        return R.error();
+//
+//     }
 
     @GetMapping("/allTags")
-
     public String allTags(){
         return JSONUtil.toJsonStr(blogMapper.selectAllTags());
     }
@@ -71,4 +83,6 @@ public class BlogDisplayController {
     public R query(@RequestParam("tag")String tag){
         return R.ok().data("tags",JSONUtil.toJsonStr(blogMapper.selectBlogByTag(tag)));
     }
+
+
 }
